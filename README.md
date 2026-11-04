@@ -74,3 +74,5 @@ uv pip install -r requirements.txt
 ``` bash
 uv run main.py
 ```
+
+[Citation guide](CITATION.md) · [BibTeX](CITATION.bib)
