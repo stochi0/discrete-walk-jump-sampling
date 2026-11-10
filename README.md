@@ -1,79 +1,36 @@
 # Discrete Walk-Jump Sampling
 
-## Overview
+A study implementation of energy-based antibody sequence generation with
+Langevin sampling and one-step denoising, based on
+[Protein Discovery with Discrete Walk-Jump Sampling](https://arxiv.org/abs/2306.12360)
+(Frey et al., 2023).
 
-This package implements the Discrete Walk-Jump Sampling (dWJS) approach for antibody sequence generation, as described in the paper "Protein Discovery with Discrete Walk-Jump Sampling" (Frey et al., 2023) [arXiv:2306.12360](https://arxiv.org/abs/2306.12360). The method combines:
+## Run
 
-1. **Energy-Based Modeling**: Learns a smoothed energy function of antibody sequences
-2. **Langevin MCMC Sampling**: Explores the smoothed data manifold
-3. **Denoising Network**: Projects samples back to the true data manifold
+With Python and [uv](https://docs.astral.sh/uv/):
 
-Key advancements include:
-- Single noise level training for both EBM and denoiser
-- Contrastive divergence training for energy-based models
-- One-step denoising for improved sample quality
-- Robust evaluation metrics for protein generation
-
-## Theoretical Background
-
-The dWJS approach addresses challenges in discrete generative modeling by:
-
-1. Learning a smoothed energy function E(x) through contrastive divergence
-2. Sampling from the smoothed manifold using Langevin dynamics:
-   x_{t+1} = x_t - η∇E(x_t) + √(2η)ε_t
-3. Projecting samples back to the true manifold using a denoising network:
-   x_clean = f_θ(x_noisy)
-
-This combines the benefits of energy-based and score-based models while simplifying training and sampling.
-
---- 
-
-This package provides a comprehensive framework for generating and evaluating antibody sequences using
-Energy-Based Models (EBMs) and Denoising Networks. The system implements the Discrete Walk-Jump
-Sampling (dWJS) approach for sequence generation.
-
-## Key Features:
-- **Energy-Based Modeling**: Learns the underlying distribution of antibody sequences
-- **Denoising Network**: Cleans noisy sequences to generate high-quality samples
-- **MCMC Sampling**: Implements Langevin dynamics for efficient sampling
-- **Evaluation Metrics**: Provides comprehensive metrics for sequence quality assessment
-
-## Modules:
-1. `config.py`: Configuration management with default and custom settings
-2. `data_processing.py`: Dataset handling and sequence preprocessing
-3. `models.py`: Neural network architectures (EBM and Denoising Network)
-4. `sampling.py`: MCMC sampling methods including dWJS
-5. `training.py`: Training loops for both EBM and Denoising Network
-6. `evaluation.py`: Metrics for sequence quality assessment
-7. `main.py`: Main execution script
-## Example Usage:
-
-To use the package with custom configuration, add this to your main.py:
-For more customization options, you can modify the following parameters in `config.py`:
-
-
-``` python
-
-config = Config(
-DATA={'num_samples': 10000, 'batch_size': 128},
-TRAINING={'ebm_epochs': 50, 'denoiser_epochs': 50}
-)
-```
-
-## Installation:
-1. Clone the repository:
-``` bash
-git clone https://github.com/ayushb03/discrete-walk-jump-sampling.git
-```
-
-2. Install dependencies:
-``` bash
+```sh
+git clone https://github.com/stochi0/discrete-walk-jump-sampling.git
+cd discrete-walk-jump-sampling
+uv venv
 uv pip install -r requirements.txt
+uv run --no-project python main.py
 ```
-3. Run the main script:
-``` bash
-uv run main.py
-```
+
+The entrypoint trains the energy model and denoiser on synthetic, randomly
+generated amino-acid sequences, then samples and plots results. It does not
+reproduce the paper's biological dataset or demonstrate experimentally validated
+antibodies. Settings live in [config.py](config.py), including `DATA`, `TRAINING`,
+and `SAMPLING`.
+
+## Implementation
+
+- [models.py](models.py), [training.py](training.py): energy and denoising networks.
+- [sampling.py](sampling.py): Langevin exploration and denoising.
+- [evaluation.py](evaluation.py), [visualisations.py](visualisations.py): metrics and plots.
+- [data_processing.py](data_processing.py): sequence preprocessing.
+
+Cite the original paper for the method; the citation below identifies this implementation.
 
 ## Citation
 
