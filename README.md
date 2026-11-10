@@ -74,3 +74,22 @@ uv pip install -r requirements.txt
 ``` bash
 uv run main.py
 ```
+
+## Citation
+
+<!-- BEGIN generated citations -->
+
+Citation metadata matches the [ORCID record](https://orcid.org/0009-0007-2252-8905). [Complete bibliography](https://www.latentpaths.com/citations/all.bib).
+
+```bibtex
+@software{bodadeprojectdiscretewalkjumpsampling,
+  author = {Bodade, Ayush},
+  title = {{Discrete Walk-Jump Sampling}},
+  url = {https://github.com/stochi0/discrete-walk-jump-sampling},
+  note = {Software implementation; cite the original research separately. Specify the commit or version used.}
+}
+```
+
+[Citation file](https://www.latentpaths.com/citations/project/discrete-walk-jump-sampling.bib) · [Work](https://github.com/stochi0/discrete-walk-jump-sampling)
+
+<!-- END generated citations -->
